@@ -55,7 +55,7 @@ export default function Home() {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to shorten URL. Please try again.",
+        description: `Failed to shorten URL. Please try again. ${error}`,
         variant: "destructive",
       });
     } finally {
@@ -73,7 +73,7 @@ export default function Home() {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to copy URL. Please try again.",
+        description: `Failed to copy URL. Please try again. ${error}`,
         variant: "destructive",
       });
     }
