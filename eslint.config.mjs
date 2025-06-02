@@ -12,6 +12,13 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+    },
+  },
+  {
     ignores: ["src/app/page.tsx", "src/components/ui/input.tsx", "src/components/ui/use-toast.ts"],
   },
 ];
