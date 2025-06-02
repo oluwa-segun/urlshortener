@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# URL Shortener
+
+A modern URL shortener built with Next.js, Supabase, and TailwindCSS.
+
+## Features
+
+- Clean, modern UI with TailwindCSS and shadcn/ui components
+- URL validation before submission
+- Loading states during URL shortening
+- Toast notifications for success and error states
+- Copy to clipboard functionality
+- Proper error handling
+- Responsive design
+- TypeScript support
+- Supabase integration for data storage
+- URL redirection with 301 status code
+
+## Tech Stack
+
+- **Frontend**: Next.js (App Router), TailwindCSS, shadcn/ui
+- **Backend**: Supabase (PostgreSQL DB + API integration)
+- **Other**: TypeScript, nanoid for slug generation
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/url-shortener.git
+cd url-shortener
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create a Supabase project and get your project URL and anon key.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Create a `.env.local` file in the root directory with the following content:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
-## Learn More
+5. Create the `links` table in your Supabase database with the following SQL:
+```sql
+create table links (
+  id uuid default gen_random_uuid() primary key,
+  slug text unique not null,
+  longUrl text not null,
+  createdAt timestamp with time zone default timezone('utc'::text, now()) not null
+);
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. Run the development server:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+7. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The easiest way to deploy this app is using Vercel:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to GitHub
+2. Import your repository to Vercel
+3. Add your environment variables in the Vercel dashboard
+4. Deploy!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
