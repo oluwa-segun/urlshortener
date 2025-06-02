@@ -52,10 +52,10 @@ export default function Home() {
         title: "Success",
         description: "URL shortened successfully!",
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: "Error",
-        description: `Failed to shorten URL. Please try again. ${error}`,
+        description: `Failed to shorten URL. Please try again. ${error.message || error}`,
         variant: "destructive",
       });
     } finally {
